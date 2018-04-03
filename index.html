@@ -64,13 +64,13 @@
                 </div>
                 <div class="card-body">
             <input type="textarea" v-model="JSON.stringify(list)" class="col" rows="10" />
-            <div id="map" class="map col"></div>
+            
           </div>
         </div>
       </div>  
     </div>  
   </div>
-
+  <div id="map" class="map col"></div>
     <script>
       var map = new ol.Map({
         layers: [
@@ -85,10 +85,12 @@
           }
         }),
         view: new ol.View({
-          center: [0, 0],
-          zoom: 2
+          projection: 'EPSG:4326',
+          center: [-79.5854, 36.8207],
+          zoom: 12
         })
       });
+      
       Vue.prototype.$http = axios;
       
       var app = new Vue({
@@ -133,7 +135,7 @@
                         source: vectorSource,
                         //style: styleFunction
                       });
-                      //map.addLayer(vectorLayer);
+                      map.addLayer(vectorLayer);
                   })
                   .catch(function(error){
                       console.log(error);
